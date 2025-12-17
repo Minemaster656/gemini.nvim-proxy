@@ -232,4 +232,4 @@ export default {
   }
 }
 ```
-to proxy requests. Export domain to env GEMINI_API_URL (without https:// and /...). Or else put this to opts.api_url (plugin config)
+to proxy requests. Export domain to env GEMINI_API_BASE (without https:// and /...). Or else put this to opts.api_base (plugin config)
