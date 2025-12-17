@@ -15,16 +15,7 @@ local function get_api_base()
   return "https://generativelanguage.googleapis.com/v1beta/models/"
 end
 
-M.config = {
-  api_base = nil
-}
-
-M.setup = function(opts)
-  opts = opts or {}
-  M.config.api_base = opts.api_base
-end
-
--- local API = "https://generativelanguage.googleapis.com/v1beta/models/";
+M.api_base = nil
 
 M.MODELS = {
   GEMINI_FLASH_LATEST = 'gemini-flash-latest',
