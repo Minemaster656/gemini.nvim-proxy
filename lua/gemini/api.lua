@@ -2,7 +2,29 @@ local uv = vim.loop or vim.uv
 
 local M = {}
 
-local API = "https://generativelanguage.googleapis.com/v1beta/models/";
+local function get_api_base()
+  if M.config and M.config.api_base then
+    return "https://" .. M.config.api_base .. "/v1beta/models/"
+  end
+  
+  local env_base = os.getenv("GEMINI_API_BASE")
+  if env_base then
+    return "https://" .. env_base .. "/v1beta/models/"
+  end
+  
+  return "https://generativelanguage.googleapis.com/v1beta/models/"
+end
+
+M.config = {
+  api_base = nil
+}
+
+M.setup = function(opts)
+  opts = opts or {}
+  M.config.api_base = opts.api_base
+end
+
+-- local API = "https://generativelanguage.googleapis.com/v1beta/models/";
 
 M.MODELS = {
   GEMINI_FLASH_LATEST = 'gemini-flash-latest',
@@ -19,7 +41,7 @@ M.gemini_generate_content = function(user_text, system_text, model_name, generat
     return ''
   end
 
-  local api = API .. model_name .. ':generateContent?key=' .. api_key
+  local api = get_api_base() .. model_name .. ':generateContent?key=' .. api_key
   local contents = {
     {
       parts = {
@@ -63,7 +85,7 @@ M.gemini_generate_content_stream = function(user_text, model_name, generation_co
     return
   end
 
-  local api = API .. model_name .. ':streamGenerateContent?alt=sse&key=' .. api_key
+  local api = get_api_base() .. model_name .. ':streamGenerateContent?alt=sse&key=' .. api_key
   local data = {
     contents = {
       {
