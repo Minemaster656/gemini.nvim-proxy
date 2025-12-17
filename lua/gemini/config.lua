@@ -3,6 +3,11 @@ local util = require('gemini.util')
 
 local M = {}
 
+local function set_api_base(api_base)
+  local api_module = require('gemini.api')
+  api_module.api_base = api_base
+end
+
 local default_temperature = 0.06
 local default_top_k = 64
 
