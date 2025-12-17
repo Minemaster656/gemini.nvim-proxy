@@ -3,8 +3,8 @@ local uv = vim.loop or vim.uv
 local M = {}
 
 local function get_api_base()
-  if M.config and M.config.api_base then
-    return "https://" .. M.config.api_base .. "/v1beta/models/"
+  if M.api_base then
+    return "https://" .. M.api_base .. "/v1beta/models/"
   end
   
   local env_base = os.getenv("GEMINI_API_BASE")
