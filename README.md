@@ -219,3 +219,17 @@ default setting
     },
 }
 ```
+
+
+# FORKED:
+You can make a cloudflare worker with code:
+```
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    url.host = 'generativelanguage.googleapis.com';
+    return fetch(new Request(url, request));
+  }
+}
+```
+to proxy requests. Export domain to env GEMINI_API_URL (without https:// and /...). Or else put this to opts.api_url (plugin config)
