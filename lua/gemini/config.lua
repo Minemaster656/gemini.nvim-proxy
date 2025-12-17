@@ -158,6 +158,9 @@ M.set_config = function(opts)
     instruction = vim.tbl_deep_extend('force', {}, default_instruction_config, opts.instruction or {}),
     task = vim.tbl_deep_extend('force', {}, default_task_config, opts.task or {})
   }
+  if opts.api_base then
+    set_api_base(opts.api_base)
+  end
 end
 
 M.get_config = function(keys)
